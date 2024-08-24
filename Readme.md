@@ -137,10 +137,10 @@ Após isso você já poderá ver os logs chegando no elastic, vamos analisar:
 
 wazuh envoando dados para o logstash via syslog:
 
-![image.png](imagens_readme/image 1.png)
+![image.png](imagens_readme/image%201.png)
 
 Agora vamos ver os dados chegando no elastic:
 
-![image.png](imagens_readme/image 2.png)
+![image.png](imagens_readme/image%202.png)
 
 como podemos ver ele já criou o index de hoje
