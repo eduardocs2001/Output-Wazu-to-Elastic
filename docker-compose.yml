@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  elasticsearch:
+    image: elasticsearch:8.5.3
+    container_name: elasticsearch
+    volumes:
+      - ./dados:/usr/share/elasticsearch/data
+    networks:
+      lab_network:
+        ipv4_address: 172.20.0.10
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - "discovery.type=single-node"
+      - "ELASTIC_PASSWORD=password"
+      - "xpack.security.enabled=true"
+      - "xpack.security.authc.api_key.enabled=true"
+
+  logstash:
+    build: .
+    container_name: logstash-container
+    networks:
+      lab_network:
+        ipv4_address: 172.20.0.11
+    ports:
+      - "514:514/udp"
+      - "9600:9600"
+    volumes:
+      - ./logstash.conf:/etc/logstash/conf.d/logstash.conf
+    restart: unless-stopped
+
+networks:
+  lab_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
