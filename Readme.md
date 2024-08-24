@@ -1,12 +1,12 @@
 # Documentação Replica dos dados wazuh > Elastic Search
 
-nosso objetivo é realizar retenção de 5 anos do wazuh, porém sabemos que com todo esse tempo teríamos problema na infraestrutura do wazuh, com grande possibilidade de quebrar, para isso faremos um output para o elastic intermediando com o Logstash
+Essa solução é indicada para quando queremos realizar uma retenção maior que 90 dias e sabemos que se mantermos uma retenção longa no wazuh, a chance de ele quebrar e muito grande assim como começar a ficar muito lento o wazuh, para isso vamos realizar a retenção no elastic search, onde ficara de backup, se um dia quisermos voltar a um longo periodo de dados podemos apenas implementar o Kibana para visualização, ou buscar via API mesmo
 
-![output wazuh to elastic.drawio.png](imagens_readme\output_wazuh_to_elastic.drawio.png)
+![Diagrama de Saída do Wazuh para Elastic](imagens_readme/output_wazuh_to_elastic.drawio.png)
 
 Com isso criaremos o Logstash e o elastic em Docker recebendo dados do wazuh, teremos a seguinte infraestrutura:
 
-![image.png](imagens_readme\image.png)
+![image.png](imagens_readme/image.png)
 
 1. Primeiramente vamos criar a pasta dados onde será salvo as informações do elastic search para manter persistência, adapte conforme seu cenário
 2. Criar o Dockerfile, onde vai montar uma imagem ubuntu com o logstash e a configuração uma vez que a imagem padrão do logstash fornecia diversas falhas
@@ -137,10 +137,10 @@ Após isso você já poderá ver os logs chegando no elastic, vamos analisar:
 
 wazuh envoando dados para o logstash via syslog:
 
-![image.png](imagens_readme\image 1.png)
+![image.png](imagens_readme/image 1.png)
 
 Agora vamos ver os dados chegando no elastic:
 
-![image.png](imagens_readme\image 2.png)
+![image.png](imagens_readme/image 2.png)
 
 como podemos ver ele já criou o index de hoje
